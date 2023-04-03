@@ -215,21 +215,21 @@ $(document).ready(() => {
       const service = services[i];
       console.log(service);
       if (service.serviceLine == sl) {
-        const div = $("<div>");
-        div.addClass("product");
-        div.text(service.productName);
+        const productDiv = $("<div>");
+        productDiv.addClass("product");
+        productDiv.text(service.productName);
 
-        const description = $("<div>");
-        description.addClass("description");
-        description.text(service.description);
+        const descriptionDiv = $("<div>");
+        descriptionDiv.addClass("description");
+        descriptionDiv.text(service.description);
 
-        div.append(description);
+        productDiv.append(descriptionDiv);
 
        // div.text(service.description);
         service.categories.forEach((category) => {
-          div.addClass("category-" + category);
+          productDiv.addClass("category-" + category);
         });
-        $(".container-" + sl).append(div);
+        $(".container-" + sl).append(productDiv);
       }
     }
   });
