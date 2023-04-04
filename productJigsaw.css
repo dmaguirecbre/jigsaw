@@ -1,11 +1,51 @@
+:root {
+    --font-family-1: 'Financier Display';
+    --font-family-2: 'Calibre';
+    --colors_primary_cbre_green: #003f2d;
+    --colors_primary_accent_green: #17e88f;
+    --colors_primary_dark_green: #012a2d;
+    --colors_primary_dark_grey: #435254;
+    --colors_primary_light_grey: #cad1d3;
+    --colors_primary_white: #ffffff;
+    --colors_secondary_midnight: #032842;
+    --colors_secondary_sage: #538184;
+    --colors_secondary_celadon: #80bbad;
+    --colors_secondary_wheat: #dbd99a;
+    --colors_secondary_cement: #7f8480;
+    --colors_monotone_grey_100: #f5f5f5;
+    --colors_monotone_grey_300: #e0e0e0;
+    --colors_monotone_grey_700: #b3b3b3;
+    --colors_monotone_grey_500: #959595;
+    --colors_monotone_grey_900: #636363;
+    --colors_status_green: #00c851;
+    --colors_status_red: #e32315;
+}
+
+body {
+    font-family: 'Open Sans', serif;
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;
-    gap:0.5em
+    gap:0.5em;
   }
 
+/* container titles should look like a heading and be centred */
+    .container-title {
+        flex: 1;
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+    }
+
   .sidebar {
-    flex: 0.5;
+    flex: 1;
+    padding-top:0.5em;
+    padding-right:2em;
+
   }
   
   .container > [class^="container-"] {
@@ -13,26 +53,26 @@
     margin-right: 1em;
   }
 
-  
-  .product {
-    display: inline-block;
-    width: 7em;
-    height: 7em;
-    margin: 0.5em;
-    background-color: #ccc;
-  }
 
   .product {
     display: inline-block;
     position: relative;
     width: 7em;
     height: 7em;
-    background-color: #ccc;
+    color: var(--colors_primary_white);
+    background-color: var(--colors_primary_cbre_green);
+    text-align: center;
+    line-height: 7em;
+
     margin: 0.5em;
-    border-radius: 10px;
+    border-radius: 2px;
     transition: transform 0.6s ease;
   }
   
+  .product.selected {
+    background-color: var(--colors_primary_accent_green);
+  }
+
   .product .description {
     position: absolute;
     top: 0;
@@ -55,4 +95,15 @@
   
   .product:hover .description {
     transform: rotateY(0deg);
+  }
+
+  .problem-statement {
+    font-weight: bold;
+    margin-bottom: 1em;
+    background-color: var(--colors_primary_light_grey);
+    padding: 10px;
+  }
+
+  .problem-statement.selected {
+    background-color: var(--colors_primary_accent_green);
   }

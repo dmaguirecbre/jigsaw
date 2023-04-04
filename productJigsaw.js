@@ -1,11 +1,31 @@
 $(document).ready(() => {
   let serviceLines = ["esg", "digital", "human-capital"];
-  let problemStatements = ["How can I ensure I will achieve my Net-Zero goals and targets?",
-  "How can a large corporate improve its employee retention rates and reduce turnover, particularly among high-performing employees?",
-  "What strategies can I implement to optimize its supply chain management and reduce costs associated with procurement, logistics, and distribution?",
-  "In what ways can a large corporate enhance its customer experience and build brand loyalty through innovative marketing and customer service initiatives?",
-  "How can a large corporate foster a culture of innovation and continuous improvement to stay ahead of the competition and maintain its position as a market leader?",
-  "What steps can a large corporate take to ensure its corporate social responsibility initiatives align with its core values and business objectives, while also benefiting the communities it serves?" ]
+  let problemStatements = [
+    {
+    "categoryNumber": 1,
+    "problemStatement": "How can I ensure I will achieve my Net-Zero goals and targets?"
+    },
+    {
+    "categoryNumber": 2,
+    "problemStatement": "How can I improve my employee retention rates and reduce turnover, particularly among high-performing employees?"
+    },
+    {
+    "categoryNumber": 3,
+    "problemStatement": "What strategies can I implement to optimize my supply chain management and reduce costs associated with procurement, logistics, and distribution?"
+    },
+    {
+    "categoryNumber": 4,
+    "problemStatement": "In what ways can I enhance my customer experience and build brand loyalty through innovative marketing and customer service initiatives?"
+    },
+    {
+    "categoryNumber": 5,
+    "problemStatement": "How can I foster a culture of innovation and continuous improvement to stay ahead of the competition and maintain its position as a market leader?"
+    },
+    {
+    "categoryNumber": 6,
+    "problemStatement": "What steps can I take to ensure my corporate social responsibility initiatives align with its core values and business objectives, while also benefiting the communities I serves?"
+    }
+    ];
   let services = [
     {
       productName: "AgileNova",
@@ -200,12 +220,14 @@ $(document).ready(() => {
       categories: [1, 6],
     },
   ];
-  const sidebar = $(".sidebar")
-  problemStatements.forEach((statement)=> {
+  const sidebar = $(".sidebar");
+  problemStatements.forEach((statement) => {
     console.log(statement);
     const statementDiv = $("<div>");
-    statementDiv.text(statement);
-    statementDiv.addClass("problemStatement");
+    statementDiv.text(statement.problemStatement);
+    // Add the categoryNumber as an attr called data-category-number to the statementDiv
+    statementDiv.attr("data-category-number", statement.categoryNumber);
+    statementDiv.addClass("problem-statement");
     sidebar.append(statementDiv);
   });
   const container = $(".container");
@@ -225,7 +247,7 @@ $(document).ready(() => {
 
         productDiv.append(descriptionDiv);
 
-       // div.text(service.description);
+        // div.text(service.description);
         service.categories.forEach((category) => {
           productDiv.addClass("category-" + category);
         });
@@ -233,4 +255,23 @@ $(document).ready(() => {
       }
     }
   });
+  //When we click on a problem statement, we want to flip all the products whose category numbers match the problem statement's categoryNumber
+    $(".problem-statement").on("click", function () {   
+        const categoryNumber = $(this).attr("data-category-number");
+        // add the selected class to the problem statement
+        $(this).toggleClass("selected");
+        //remove the selected class from all other problem statements
+        $(".problem-statement").each(function () {
+            if ($(this).attr("data-category-number") !== categoryNumber) {
+                $(this).removeClass("selected");
+            }
+        });
+        // add the selected class to the products that match the category number
+        $(".product").each(function () {
+            if ($(this).hasClass("category-" + categoryNumber)) {
+                $(this).toggleClass("selected");
+            }
+        });
+    });
+ 
 });
